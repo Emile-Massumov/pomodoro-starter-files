@@ -1,14 +1,15 @@
 const timer = {
-    pomodoro: 25,
-    shortBreak: 5,
-    longBreak: 15,
+    pomodoro: 1,
+    shortBreak: 1,
+    longBreak: 1,
     longBreakInterval: 4,
     sessions: 0,
   };
   let interval;
-   
+  const buttonSound = new Audio('button-sound.mp3');
   const mainButton = document.getElementById('js-btn');
   mainButton.addEventListener('click', () => {
+    buttonSound.play();
     const { action } = mainButton.dataset;
     if (action === 'start') {
       startTimer();
@@ -64,6 +65,8 @@ function startTimer () {
            default:
              switchMode('pomodoro');
       }
+      document.querySelector(`[data-sound="${timer.mode}"]`).play();
+
       startTimer();
     }
   }, 1000);
