@@ -1,7 +1,7 @@
 const timer = {
-    pomodoro: 1,
-    shortBreak: 1,
-    longBreak: 1,
+    pomodoro: 25,
+    shortBreak: 5,
+    longBreak: 15,
     longBreakInterval: 4,
     sessions: 0,
   };
@@ -87,8 +87,14 @@ function stopTimer () {
     min.textContent = minutes;
     sec.textContent = seconds;
 
+    const text =
+    timer.mode === 'pomodoro' ? 'Get back to work!' : 'Take a break!';
+    document.title = `${minutes}:${seconds} — ${text}`;
+
     const progress = document.getElementById('js-progress');
     progress.value = timer[timer.mode] * 60 - timer.remainingTime.total;
+
+
   }
   
     function switchMode(mode) {
